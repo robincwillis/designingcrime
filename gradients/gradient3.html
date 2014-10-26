@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<title>asdf</title>
+<head>
+
+</head>
+<body>
+<canvas id="myCanvas" width="600" height="550" style="border:1px solid black;">
+</canvas>
+
+
+
+
+<script>
+
+function drawTriangle(ctx, x, y, triangleWidth, triangleHeight, fillStyle){
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.lineTo(x + triangleWidth / 2, y + triangleHeight);
+	ctx.lineTo(x - triangleWidth / 2, y + triangleHeight);
+	ctx.closePath();
+	ctx.fillStyle = fillStyle;
+	ctx.fill();
+}
+
+window.onload = function(){
+
+	var canvas = document.getElementById("myCanvas");
+	var ctx = canvas.getContext("2d");
+
+
+
+	var grd;
+	var triangleWidth = 150;
+	var triangleHeight = 150;
+	var triangleY = canvas.height / 2 - triangleWidth / 2;
+
+	// linear gradient fill (second from left)
+	grd = ctx.createLinearGradient(canvas.width  / 5, triangleY, canvas.width / 5, triangleY + triangleHeight);
+	var xS = canvas.width/2;
+	var yS = canvas.height/2;
+	var rS = 10;
+	var xE = canvas.width/2 -10;
+	var yE = canvas.height/2 -10;
+	var rE = 30;
+
+
+
+	//drawTriangle(ctx, canvas.width / 2, triangleY, triangleWidth, triangleHeight, grd);
+
+	canvas.onmousemove = function(e){
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,0,canvas.width, canvas.height);
+
+		var grd=ctx.createRadialGradient(xS, yS, rS, e.x, e.y, rE);
+
+		grd.addColorStop(0, "red");
+		grd.addColorStop(1, "blue");
+
+		console.log(e)
+
+		ctx.fillStyle = grd;
+
+		ctx.fillRect(0,0,canvas.width, canvas.height);
+	}
+
+};
+
+</script>
+
+</body>
+</html>

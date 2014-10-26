@@ -1,0 +1,68 @@
+<html>
+<head>
+	<title>asdf</title>
+	<style type="text/css">
+	body{margin:0;}
+	</style>
+</head>
+<body>
+
+<canvas id='c'></canvas>
+
+<script type="text/javascript">
+var $id = function(id) { return document.getElementById(id); };
+
+var SCREEN_WIDTH    = innerWidth;
+var SCREEN_HEIGHT   = innerHeight;
+var CIRCLE_MAX_NUM  = 50;
+var CIRCLE_RADIUS = 10;
+var circleList = [];
+var canvas = $id("c");
+canvas.width = SCREEN_WIDTH;
+canvas.height= SCREEN_HEIGHT;
+
+var ctx = canvas.getContext("2d");
+
+var Circle = function(x, y, color)
+{
+    this.x = x || 0;
+    this.y = y || 0;
+    this.color = color || "white";
+    this.target= null;
+};
+
+Circle.prototype = {
+    x: null,
+    y: null,
+    color: null,
+    target: null,
+
+    draw: function(ctx)
+    {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, CIRCLE_RADIUS, 0, Math.PI*2, false);
+        ctx.fill();
+        ctx.closePath();
+    }
+};
+
+ctx.fillStyle = "rgba(0, 0, 0, 1)";
+ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+for (var i=0; i<CIRCLE_MAX_NUM; ++i)
+{
+    circleList.push(new Circle(
+        i * CIRCLE_RADIUS*2 + (CIRCLE_RADIUS),
+        CIRCLE_RADIUS*2,
+        "hsla(" + (360/CIRCLE_MAX_NUM)*i +  ", 75%, 50%, 1)"
+    ));
+}
+
+for (var i=0; i<CIRCLE_MAX_NUM; i++){
+	circleList[i].draw(ctx);
+}
+
+</script>
+</body>
+</html>

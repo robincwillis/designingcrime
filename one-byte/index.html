@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>binreader</title>
+</head>
+
+<style type="text/css">
+
+body{
+	font-size:8px;
+	font-family: sans-serif;
+	padding:10px;
+}
+
+.results{
+	width:500px;
+}
+
+canvas{
+	display: block;
+	margin:0 auto;
+	border:1px solid #d7d7d7;
+}
+
+</style>
+<body>
+
+	<canvas id="canvas">
+
+	</canvas>
+
+<div class="results"></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+<script type="text/javascript">
+
+var c = document.getElementById('canvas');
+var gridSize = 5;
+var g = 5;
+var gridCount = 30;
+
+c.width  = g*3*(gridCount*2);
+c.height = g*3*gridCount;
+
+var ctx = canvas.getContext('2d');
+
+var bw = g*3*(gridCount*2);
+var bh = g*3*gridCount;
+var p = 0;
+
+var blockXPos = 0;
+var blockYPos = 0;
+
+function getPixel(imgData, x, y){
+	index = ( x + y * img.width) * 4;
+	var pixel = [];
+	pixel[0] = imgData[index+0];
+	pixel[1] = imgData[index+1];
+	pixel[2] = imgData[index+2];
+	pixel[3] = imgData[index+3];
+	return pixel;
+}
+
+
+function setPixel(imgData, x, y, r, g, b, a){
+	index = ( x + y * imgData.width) * 4;
+	imgData.data[index+0] = r;
+	imgData.data[index+1] = g;
+	imgData.data[index+2] = b;
+	imgData.data[index+3] = a;
+}
+
+function drawBlock(xPos, yPos, width, height, color){
+
+
+
+	var imageData = ctx.getImageData(xPos, yPos, width, height);
+
+	for(var i=0; i < imageData.data.length;i+=4){
+		imageData.data[i] = color;
+		imageData.data[i+1] = color;
+		imageData.data[i+2] = color;
+		imageData.data[i+3] = 255;
+	}
+
+	ctx.putImageData(imageData, xPos, yPos);
+
+}
+
+
+
+function drawByte(byte){
+
+	for(var i = 0; i < byte.length; i++){
+		var xx = Math.floor(i/3);
+		var yy = i%3;
+		if(byte[i] == 1){
+			drawBlock(blockXPos + (xx*g),blockYPos + (yy*g),g,g,0);
+		}
+	}
+
+	blockXPos +=(g*3);
+	if(blockXPos == c.width){
+		blockXPos = 0;
+		blockYPos +=(g*3);
+		if(blockYPos == c.height){
+			blockYPos = 0;
+		}
+
+	}
+}
+
+
+function drawBoard(){
+	for (var x = 0; x <= bw; x += g*3) {
+	    ctx.moveTo(0.5 + x + p, p);
+	    ctx.lineTo(0.5 + x + p, bh + p);
+	}
+
+
+	for (var x = 0; x <= bh; x += g*3) {
+	    ctx.moveTo(p, 0.5 + x + p);
+	    ctx.lineTo(bw + p, 0.5 + x + p);
+	}
+
+	ctx.strokeStyle ="#d7d7d7";
+	ctx.stroke();
+}
+
+drawBoard();
+
+var byteArray = [
+    255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, // red
+    0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, // green
+    0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255 // blue
+];
+
+var i = 0;
+
+function byteLoop(byteArray){
+	setTimeout(function () {
+		var byte = byteArray[i].toString(2);
+         drawByte(byte);
+    	  i++;
+      if (i < byteArray.length) {
+         byteLoop(byteArray);
+      }
+   }, 0)
+
+}
+
+// function byteLoop(byteArray){
+// 	var byte = byteArray[i].toString(2);
+//          drawByte(byte);
+//     	  i++;
+//       if (i < byteArray.length) {
+//          byteLoop(byteArray);
+//       }
+// }
+
+//get the data
+
+var req = new XMLHttpRequest();
+req.open("GET", "306x423.jpg", true);
+req.responseType = "arraybuffer";
+
+req.onload = function(e){
+	var arrayBuffer = req.response;
+	if(arrayBuffer){
+		var byteArray = new Uint8Array(arrayBuffer);
+		console.log(byteArray.byteLength);
+
+		byteLoop(byteArray);
+		// for (var i = 0; i <byteArray.byteLength/5; i++) {
+		// 	//convert byte to bit array
+		// 	var byte = byteArray[i].toString(2);
+		// 	//call draw bit function
+		// 	setTimeout(function() {
+		// 		console.log(byte);
+		//       drawByte(byte);
+		//     }, 200);
+
+		// }
+	}
+};
+
+req.send(null);
+
+</script>
+
+</body>
+</html>

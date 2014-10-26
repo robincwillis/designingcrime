@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>wallpaper</title>
+</head>
+
+<style type="text/css">
+html, body{
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding:0;
+}
+
+canvas{
+	width: 100%;
+	height:100%;
+
+	image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+
+    image-rendering: -o-crisp-edges;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+</style>
+
+<body>
+
+<canvas id="newport"></canvas>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+<script type="text/javascript">
+
+	var grey = "#eaeeee";
+	var gold = "#a68636";//#DAA520"//"#a0885c";
+	var grn1 = "#00d5d9";//"#30a7a9";
+	var grn2 = "#113f34"; //#367f8b";
+
+	var greyBand = 0.29;
+	var goldBand = 0.05;
+	var greenBand = 1-greyBand-goldBand;
+	var lineCount = 50;
+
+	var c = document.getElementById("newport");
+	var ctx = c.getContext("2d");
+	c.width =  $(window).width();
+	c.height = $(window).height();
+	var width = c.width;
+	var height = c.height;
+
+
+
+	$(window).resize( respondCanvas ).resize();
+
+	function respondCanvas(){
+		width = c.width;
+		height = c.height;
+		ctx.fillStyle= grey;
+		ctx.fillRect(0, 0, width, height*greyBand);
+		ctx.fillStyle= gold;
+		ctx.fillRect(0,height*greyBand,width, height*goldBand);
+		ctx.fillStyle= grn1;
+		ctx.fillRect(0,Math.floor((height*greyBand)+(height*goldBand)),width, height*greenBand);
+
+		ctx.fillStyle= grn2;
+
+		var count = 1;
+
+		for (var y = (height*greyBand)+(height*goldBand); y < height; y += height/lineCount) {
+
+			ctx.fillRect(0,Math.floor(y),width, Math.floor(count));
+			count+=0.41;
+		}
+
+	}
+
+
+</script>
+
+</body>
+</html>

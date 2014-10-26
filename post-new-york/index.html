@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Post New York Post New York Post</title>
+	<style type="text/css">
+	body{
+		margin:0;
+	}
+
+	#pny{
+		position: fixed;
+		width:100%;
+		height:100%;
+		margin:0;
+		background: url('pny.png');
+		background-position:center;
+	}
+	</style>
+</head>
+
+
+<body>
+	<div id="pny"></div>
+	<script type="text/javascript">
+	function StartMove() {
+		var cssBGImage=new Image();
+		cssBGImage.src="pny.png";
+
+		window.cssMaxWidth=404;//ssBGImage.width;
+		window.cssXPos=0;
+		setInterval("MoveBackGround()",50);
+		}
+
+		function MoveBackGround () {
+		window.cssXPos=window.cssXPos+1;
+		if (window.cssXPos>=window.cssMaxWidth) {
+		window.cssXPos=0;
+		}
+		toMove=document.getElementById("pny");
+		toMove.style.backgroundPosition=window.cssXPos+"px 0px";
+
+		}
+
+	var colors = ["red", "blue","black", "gold", "lime", "white","deeppink", "azure"];
+
+	var on = true;
+
+	StartMove();
+	setInterval(function(){
+		var index = Math.floor(Math.random()*colors.length);
+		document.body.style.backgroundColor =  on ? "black" : colors[index];
+		on = !on;
+	},20);
+
+	</script>
+</body>
+</html>

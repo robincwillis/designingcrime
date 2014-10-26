@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	body{
+		margin:0;
+	}
+	</style>
+
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+<script type="text/javascript">
+
+	var canvas = $('canvas');
+	var ctx = canvas[0].getContext('2d');
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+
+	var rays = 100;
+	var colors = {
+		bgColorStart: 'rgba(0,0,25,0.8)',
+    bgColorEnd: 'rgba(0,0,25,0.1)',
+
+    rayColorStart: 'rgba(0,255,25,0.1)',
+    rayColorEnd: 'rgba(155,0,255,0.1)',
+	};
+
+	ctx.canvas.width  = w;
+  ctx.canvas.height = h;
+
+  var cp = {x : window.innerWidth/2, y : window.innerHeight/2};
+  var originX = cp.x;
+  var originY = cp.y;
+
+  // find maximum distance to a corner
+    var radius = Math.max.apply(Math, [
+      {x:0,y:0},
+      {x:w,y:0},
+      {x:0,y:h},
+      {x:w,y:h}
+    ].map(function(c){
+      // use the pythagorean theorem, luke
+      return Math.sqrt(Math.pow(c.x - originX, 2) + Math.pow(c.y - originY, 2));
+    }));
+
+    //radius = 300;
+
+  ctx.fillStyle = "black";
+  ctx.fillRect(0,0, w,h);
+
+   // grd = ctx.createLinearGradient(100,100,150,300);
+   // grd.addColorStop(0, 'rgba(0,255,0,0)');
+   // grd.addColorStop(1, 'rgba(0,0,255,1)');
+   // ctx.fillStyle = grd;
+   // ctx.fillRect(0,0,500,500);
+
+   // build the background gradient
+      var bgGrad = ctx.createRadialGradient(
+        originX, originY, 0, // inner circle, infinitely small
+        originX, originY, radius // outer circle, will just cover canvas area
+      );
+      bgGrad.addColorStop(0, colors.bgColorStart);
+      bgGrad.addColorStop(1, colors.bgColorEnd);
+
+      // build the foreground gradient
+      var rayGrad = ctx.createRadialGradient(
+        originX, originY, 0, // inner circle, infinitely small
+        originX, originY, radius // outer circle, will just cover canvas area
+      );
+      rayGrad.addColorStop(0, colors.rayColorStart);
+      rayGrad.addColorStop(1, colors.rayColorEnd);
+
+      // fill in bg
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0,0,w,h);
+
+			 var gradient=ctx.createRadialGradient(        originX, originY, 0, // inner circle, infinitely small
+        originX, originY, radius // outer circle, will just cover canvas area
+        );
+			gradient.addColorStop("0",'rgba(0,0,0,0.0)');
+			gradient.addColorStop("0.3",'rgba(255,255,255,0.1)');
+			gradient.addColorStop("0.5",'rgba(255,100,255,0.5)');
+
+
+			// Fill with gradient
+			ctx.strokeStyle=gradient;
+
+      // draw rays
+      ctx.fillStyle = rayGrad;
+
+      var spokeCount =  rays * 2;
+
+
+      for (var i=0; i< rays; i++){
+      	ctx.beginPath();
+      	ctx.moveTo(originX, originY);
+      	ctx.lineTo(originX, originY);
+        for (var j=0; j<2; j++) {
+        	var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+        	var r = Math.floor((Math.random() * 10) + 1);// Math.random() * plusOrMinus;
+        	var nRadius = radius + Math.random();
+        	console.log(traversal);
+          var thisSpoke = i * 2 + j * r;
+          var traversal = thisSpoke / spokeCount;
+          var ax = originX + nRadius * 1.5 * Math.cos(traversal * 2 * Math.PI);
+          var ay = originY + nRadius * 1.5 * Math.sin(traversal * 2 * Math.PI);
+          ctx.lineTo(ax,ay);
+        }
+        ctx.lineTo(originX, originY);
+        ctx.closePath();
+        ctx.fill();
+      	ctx.stroke();
+      }
+
+</script>
+</body>
+</html>

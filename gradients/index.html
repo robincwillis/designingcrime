@@ -1,0 +1,69 @@
+    <!DOCTYPE html>
+<html>
+<head>
+
+    <title>Gradient</title>
+    <style type="text/css">
+    body{
+        margin:0;
+    }
+    canvas{width:100%;height:100%;display:block;}
+    </style>
+
+    <script type="text/javascript" src="graphics.js"></script>
+    <script type="text/javascript" src="math.js"></script>
+
+    <script type="text/javascript">
+
+            window.addEventListener('resize', function(){
+                draw();
+            })
+
+            function draw() {
+                var canvas = document.getElementById("canvas");
+                canvas.height = window.innerHeight;
+                canvas.width = window.innerWidth;
+                var halfWidth = canvas.width / 2;
+                var halfHeight = canvas.height / 2;
+
+                var gradientCenter = new Point(halfWidth, halfHeight);
+                var colors = [ [1, 0, 0, 1], // red
+                    [0, 1, 0, 1], // green
+                    [0, 0, 1, 1] // blue
+                ];
+
+                var angularGradient = function(point) {
+                    // figure out angle
+                    var dir = point.sub(gradientCenter);
+                    var angle = Math.atan2(dir.y, dir.x);
+
+                    // wrap around as positive
+                    if (dir.y < 0 ) {
+                        angle += 2 * Math.PI;
+                    }
+
+                    // map to [0, 1] range
+                    angle /= (2 * Math.PI);
+
+                    // figure out which segments to interpolate
+                    var angleRatio = angle * colors.length;
+                    var index = Math.floor(angleRatio);
+                    var leftColor = index == 0? colors[colors.length - 1]:
+                        colors[index - 1];
+
+                    var rightColor = colors[index];
+
+                    // figure out interpolation factor
+                    var lerpFac = angleRatio % 1;
+
+                    return lerp(leftColor, rightColor, lerpFac);
+                }
+
+                process(canvas, angularGradient);
+            }
+        </script>
+    </head>
+    <body onload="draw()">
+        <canvas id="canvas" width="300" height="300"></canvas>
+    </body>
+</html>
