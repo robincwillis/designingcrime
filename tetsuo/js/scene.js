@@ -10,8 +10,8 @@ app.scene = {
 	materials : {},
 	renderer : new THREE.WebGLRenderer({antialias: true}),
 
-	width : 800,
-	height : 600,
+	width : window.innerWidth,// 1070,
+	height : window.innerHeight,//726,
 
 	initRenderer : function(){
 		app.scene.renderer.setClearColor(0xEEEEEE, 1.0);
@@ -55,10 +55,18 @@ app.scene = {
 
 	initObjects : function(){
 		//make a series of brick clusters
-		//var b = app.geometry.makeBrick(new THREE.Vector3(0,0,0), 4, 200, 150, 0);
-		var c1 = app.geometry.makeCluster(new THREE.Vector3(0,0,0), 450, 9,90,30,13,50);
-		var c2 = app.geometry.makeCluster(new THREE.Vector3(0,-600,-400), 400, 6,80,20,15,40);
-		var c3 = app.geometry.makeCluster(new THREE.Vector3(-600,0,-400), 875, 4,40,10,15,30);
+		var a1 = app.geometry.makeCluster(new THREE.Vector3		(0,-500,-1500), 	450, 3,		90,30,13,50);
+		var a2 = app.geometry.makeCluster(new THREE.Vector3		(0,-200,-1600), 	550, 4,		30,30,13,50);
+		var a3 = app.geometry.makeCluster(new THREE.Vector3		(-500,0,-1800), 	450, 2,	100,30,13,20);
+
+
+		var b1 = app.geometry.makeCluster(new THREE.Vector3		(0,-500,600),		 	450, 7,		90,30,13,450);
+		var b2 = app.geometry.makeCluster(new THREE.Vector3		(0,-200,700), 		650, 6,		90,30,13,50);
+		var b3 = app.geometry.makeCluster(new THREE.Vector3		(-500,0,1000), 		450, 9,		90,30,13,50);
+
+		var c1 = app.geometry.makeCluster(new THREE.Vector3	(0,0,0), 						450, 9,		90,30,13,50);
+		var c2 = app.geometry.makeCluster(new THREE.Vector3	(0,-600,-400), 			400, 6,		80,20,15,40);
+		var c3 = app.geometry.makeCluster(new THREE.Vector3	(-600,0,-400), 			875, 4,		40,10,15,30);
 		//var sprite = document.createElement( 'img' );
 		//sprite.src = 'textures/2.png';
 		//console.log(b);

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-	<title>Designing Crime | It's like art on the internet</title>
+	<title>Designing Crime</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<style type="text/css">
 
@@ -79,6 +79,7 @@
 	footer ul li{
 		display: inline-block;
 		text-transform: uppercase;
+		min-width: 48px;
 	}
 
 	footer ul li:before{
@@ -102,20 +103,18 @@
 	<section class="main">
 
 		<ol type="I" >
+
 			<li>
-				<a href="studio/">Studio</a>
-			</li>
-			<li>
-				<a href="blitch/">blitch</a>
+				<a href="blitch/">Side Eye</a>
 			</li>
 			<li>
 				<a href="dcf/">Megaman</a>
 			</li>
 			<li>
-				<a href="gradients/">Gradients</a>
+				<a href="gradients/">Silent Partners</a>
 			</li>
 			<li>
-				<a href="haiku/">Baby Names</a>
+				<a href="adjective-noun/">Primer</a>
 			</li>
 			<li>
 				<a href="heyess/">Heyess</a>
@@ -123,9 +122,9 @@
 			<li>
 				<a href="tetsuo/">Tetsuo</a>
 			</li>
-			<li>
-				<a href="kill-ie/">Kill IE</a>
-			</li>
+<!-- 			<li>
+				<a href="kill-ie/">Everything is going to be ok</a>
+			</li> -->
 			<li>
 				<a href="print-in-base/">Print In Base</a>
 			</li>
@@ -133,7 +132,7 @@
 				<a href="sudden-death/">Sudden Death</a>
 			</li>
 			<li>
-				<a href="one-byte/">One Byte</a>
+				<a href="one-byte/">Little Endian</a>
 			</li>
 			<li>
 				<a href="nodes/">Nodes</a>
@@ -153,14 +152,22 @@
 		</ol>
 	</section>
 	<footer>
-		<p>kinda art, kinda on the internet. It's all good.<div style="display:none;">All rights reserverd</div></p>
+		<p style="display:none;">All rights reserverd</p>
 		<ul>
-<!-- 			<li><a href="#">General Information</a></li>
-			<li><a href="#">Contact</a></li> -->
+			<li><a href="studio/">Studio</a></li>
 			<li><a href="http://radio.designingcrime.com">radio</a></li>
-			<li><a href="http://designingcrime.tumblr.com">bl*g</a></li>
+			<li><a href="http://designingcrime.tumblr.com">blog</a></li>
 		</ul>
 	</footer>
-
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+	<script src="jquery.charcycle.0.0.1.js"></script>
+	<script type="text/javascript">
+	$('li').mouseenter(function(){
+    if($(this).hasClass('cycling')==false){
+        $(this).charcycle({'target':'a'});
+    }
+});
+	</script>
 </body>
 </html>
