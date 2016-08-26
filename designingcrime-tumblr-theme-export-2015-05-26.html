@@ -1,0 +1,477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+
+</html>
+    <head>
+        <title>{Title}</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script src="https://s3.amazonaws.com/designingcrime/js/jquery.killphotoset.js"></script>
+		<script type="text/javascript" src="http://codysherman.com/tools/infinite-scrolling/code"></script>
+
+
+		<meta name="image:Icon" content="https://s3.amazonaws.com/designingcrime/img/dc_black_32.png"/>
+
+        <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/designingcrime/css/typography.css" />
+        <link rel="shortcut icon" href="{Favicon}">
+        <link rel="alternate" type="application/rss+xml" href="{RSS}">
+        {block:Description}<meta name="description" content="{MetaDescription}" />{/block:Description}
+
+		<style type="text/css">
+
+
+body{
+  margin:0;
+  padding:0;
+  text-align:center;
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+  -webkit-column-gap: 0; /* Chrome, Safari, Opera */
+    -moz-column-gap: 0; /* Firefox */
+    column-gap:0;
+}
+#logo{
+    display:none;
+  float:right;
+  z-index:1;
+  margin-right:20px;
+}
+#container{
+	text-align:left;
+    width:500px;
+    margin: 0 auto;
+}
+#header{
+  display:none;
+  width:500px;
+  margin-top:50px;
+}
+#toolbar{
+    display:none;
+  top:0px;
+  width:500px;
+  position:fixed;
+  height:23px;
+  z-index:100;
+}
+#toolbar ul{
+  padding:0px;
+  margin:0px;
+  list-style:none;
+}
+#toolbar li{
+     border-left: 1px solid #fff;
+     height:23px;
+     line-height:23px;
+     display:inline-block;
+     float:right;
+}
+#toolbar a{
+     padding-left: 9px;
+     padding-right: 9px;
+}
+#content{
+  position:relative;
+}
+#content ul{
+  list-style-type:none;
+  margin:0px;
+  padding:0px;
+  list-style-position: inside;
+  -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+  
+}
+
+.photoset_row{
+    margin-top:0;
+}
+
+#post{
+  margin-bottom:30px;
+  margin-bottom:0;
+}
+#post_date{
+    display:none;
+  float:left;
+  height:20px;
+  position:absolute;
+  left:-175px;
+  text-align:right;
+}
+#post_date img{
+	margin:0;
+	padding:0;
+}
+#post_content h2, #post_content h3, #post_date h2{
+  margin-top:0px;
+  padding;0px;
+}
+#post_body{
+  width:500px;
+}
+#post_media{
+width:500px;
+height:300px;
+background:#000;
+overflow:hidden;
+}
+#post_other ul, #post_other li {
+  display: inline;
+  padding-left: 3px;
+  padding-right: 7px;
+  border-right: 1px dotted #7F7F7F;;
+  }
+#post_other li.last {
+  display: inline;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-right: 0px;
+  } 
+#post_other ul.tags {
+display: inline;
+margin: 0;
+padding: 0;
+}
+#post_other ul.tags li {
+display: inline;
+list-style: none;
+margin: 0;
+padding: 0;
+}
+#post_other ul.tags li:after {
+content: ", ";
+color: #333;
+}
+#post_other ul.tags li:last-child:after {
+content: "";
+}
+#navigation{
+  text-align: center;
+  width:500px;
+  margin-bottom:20px;
+}
+.alignleft {
+float: left;
+}
+.alignright {
+float: right;
+}
+#footer{
+  padding-top:8px;
+  padding-bottom:8px;
+  border-top:#000 solid 1px;
+  border-bottom:#7F7F7F; solid 1px;
+  width:500px;
+  margin-bottom:35px;
+}
+
+
+#post_date{
+	height:20px;
+	width:150px;
+}
+
+hr{
+border: none 0; 
+border-top: 1px solid #1C1C1C;/*the border*/
+height:1px;
+}
+#post_tags li{
+padding-bottom:10px;
+}
+#header a:hover{
+text-decoration:none;
+}
+#permalink_navigation p{
+margin:0;
+padding:0;
+}
+
+ol.notes {
+                padding: 0px;
+/*                margin: 25px, 0px,0px,0px;*/
+                list-style-type: none;
+
+                font-size:12px;
+            }
+ol.notes li.note {
+            
+                padding-top: 10px;
+padding-bottom: 10px;
+
+            }
+li.note{
+    border-top: solid 1px #ccc;
+}
+ol.notes li:first-child{
+border:none;
+}
+
+            ol.notes li.note img.avatar {
+                vertical-align: -4px;
+                margin-right: 20px;
+margin-left: 0px;
+                width: 16px;
+                height: 16px;
+            }
+    </style>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-4803873-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </head>
+
+  	<body>
+<!--### LOGO ###-->
+        <div id="logo"><a href="/"><img src="https://s3.amazonaws.com/designingcrime/img/dc_black_200.png" width="100" height="56"/></a></div>
+    	<div id="container">
+<!--### TOOLBAR ###-->
+		<div id="toolbar">
+			<div id="search" class="myform">
+   				<form id="form" name="form" method="get" action="/search">
+   				<input type="text" name="q" id="name" value="{SearchQuery}"/>
+   				<button type="submit" value="{lang:Search}">Search</button>
+			</div>
+          	<ul>
+              {block:AskEnabled}
+              <li><a href="/ask">Contact</a></li>
+             {/block:AskEnabled}
+             <li><a href="/archive">{lang:Archive}</a></li>
+              
+              <li><a href="{RSS}">{lang:RSS}</a></li></ul>
+		</div>
+<!--### HEADER ###-->
+	<div id="header">
+   		<h1><a href="/">{Title}</a></h1>
+        {block:Description}<h2>{Description}</h2>{/block:Description}
+	</div>
+	
+    <div style="clear:both;"></div>
+<!--### CONTENT ###-->    
+	<div id="content">
+    
+	{block:TagPage}
+    	<h2>Posts tagged "{Tag}"</h2>
+    {/block:TagPage}
+      
+	{block:Posts}
+<!--### TEXT POST ###-->  
+ 		{block:Text}
+		<div id="post">
+			<!--### POST DATE ###-->
+			<div id="post_date">
+            	<!--<a href="{Permalink}"><img src="{image:Icon}" class="alignleft" style="vertical-align:text-bottom"/></a>-->
+				<a href="{Permalink}"> {block:Date} <h2>{MonthNumber}-{DayOfMonth}-{ShortYear}</h2>{/block:Date} </a>
+				<ul id="post_other" ><li>{NoteCountWithLabel}</li><li class="last"><a href="{Permalink}">Permalink</a></li></ul>
+				
+				{block:PermalinkPagination}
+					<hr />
+ 					<div style="clear:both;"></div>
+					<div id="permalink_navigation">
+						{block:PreviousPost}<p class="alignleft"><a href="{PreviousPost}">Prev</a></p>{/block:PreviousPost}
+						{block:NextPost}<p class="alignright"><a href="{NextPost}">Next</a></p>{/block:NextPost}
+					</div> 
+					<div style="clear:both;"></div> 
+ 				{/block:PermalinkPagination}
+
+				{block:HasTags}
+					<hr />
+     				<ul class="tags" id="post_tags">{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{/block:Tags}</ul>
+				{/block:HasTags}
+        	</div>
+			<!--### POST CONTENT ###-->  
+			<div id="post_content">
+				<h2>{Title}</h2>
+				<div id="post_body"><p>{Body}</p></div>
+			
+			</div>
+		</div>
+		{/block:Text}
+<!--### PHOTO POST ###-->  
+        {block:Photo}
+        <div id="post">
+			<!--### POST DATE ###-->
+			<div id="post_date">
+            	<a href="{Permalink}"><img src="{image:Icon}" class="alignleft" style="vertical-align:text-bottom"/></a>
+				<a href="{Permalink}"> {block:Date} <h2>{MonthNumber}-{DayOfMonth}-{ShortYear}</h2>{/block:Date} </a>
+				<ul id="post_other" >{block:NoteCount} <li>{NoteCountWithLabel}</li>{/block:NoteCount}<li class="last"><a href="{Permalink}">Permalink</a></li></ul>
+				
+				{block:PermalinkPagination}
+					<hr />
+ 					<div style="clear:both;"></div>
+					<div id="permalink_navigation">
+						{block:PreviousPost}<p class="alignleft"><a href="{PreviousPost}">Prev</a></p>{/block:PreviousPost}
+						{block:NextPost}<p class="alignright"><a href="{NextPost}">Next</a></p>{/block:NextPost}
+					</div> 
+					<div style="clear:both;"></div> 
+ 				{/block:PermalinkPagination}
+
+				{block:HasTags}
+					<hr />
+     				<ul class="tags" id="post_tags">{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{/block:Tags}</ul>
+				{/block:HasTags}
+        	</div>
+			<!--### POST CONTENT ###-->  
+			<div id="post_content">
+				{block:Caption}<div id="post_body"><p>{Caption}</p></div>{/block:Caption}
+				<a href="{PhotoURL-HighRes}" target="{target}"><img src="{PhotoURL-500}" alt="{PhotoAlt}"/></a>{block:PostNotes}<div id="post_notes">{PostNotes}</div> {/block:PostNotes}
+			</div>
+		</div>
+    	{/block:Photo}
+<!--### PHOTOSET POST ###-->  
+		{block:Photoset} 
+		<div id="post">
+			<!--### POST DATE ###-->
+			<div id="post_date">
+            	<a href="{Permalink}"><img src="{image:Icon}" class="alignleft" style="vertical-align:text-bottom"/></a>
+				<a href="{Permalink}"> {block:Date} <h2>{MonthNumber}-{DayOfMonth}-{ShortYear}</h2>{/block:Date} </a>
+				<ul id="post_other" >{block:NoteCount} <li>{NoteCountWithLabel}</li>{/block:NoteCount}<li class="last"><a href="{Permalink}">Permalink</a></li></ul>
+				
+				{block:PermalinkPagination}
+					<hr />
+ 					<div style="clear:both;"></div>
+					<div id="permalink_navigation">
+						{block:PreviousPost}<p class="alignleft"><a href="{PreviousPost}">Prev</a></p>{/block:PreviousPost}
+						{block:NextPost}<p class="alignright"><a href="{NextPost}">Next</a></p>{/block:NextPost}
+					</div> 
+					<div style="clear:both;"></div> 
+ 				{/block:PermalinkPagination}
+
+				{block:HasTags}
+					<hr />
+     				<ul class="tags" id="post_tags">{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{/block:Tags}</ul>
+				{/block:HasTags}
+        	</div>
+			<!--### POST CONTENT ###-->  
+			<div id="post_content">
+				{block:Caption}<div id="post_body"><p>{Caption}</p></div>{/block:Caption}
+				{PhotoSet-500}{block:PostNotes}<div id="post_notes">{PostNotes}</div> {/block:PostNotes}
+			</div>
+		</div>
+		{/block:Photoset}
+<!--### QUOTE POST ###-->  
+		{block:Quote}
+		<div id="post">
+			
+		</div> 
+		{/block:Quote}
+<!--### LINK POST ###-->  
+		{block:Link} 
+		<div id="post">
+			
+		</div>
+		{/block:Link}
+<!--### AUDIO POST ###-->  
+		{block:Audio}
+		<div id="post">
+			<!--### POST DATE ###-->
+			<div id="post_date">
+            	<a href="{Permalink}"><img src="{image:Icon}" class="alignleft" style="vertical-align:text-bottom"/></a>
+				<a href="{Permalink}"> {block:Date} <h2>{MonthNumber}-{DayOfMonth}-{ShortYear}</h2>{/block:Date} </a>
+				<ul id="post_other" ><li>{NoteCountWithLabel}</li><li class="last"><a href="{Permalink}">Permalink</a></li></ul>
+				
+				{block:PermalinkPagination}
+					<hr />
+ 					<div style="clear:both;"></div>
+					<div id="permalink_navigation">
+						{block:PreviousPost}<p class="alignleft"><a href="{PreviousPost}">Prev</a></p>{/block:PreviousPost}
+						{block:NextPost}<p class="alignright"><a href="{NextPost}">Next</a></p>{/block:NextPost}
+					</div> 
+					<div style="clear:both;"></div> 
+ 				{/block:PermalinkPagination}
+
+				{block:HasTags}
+					<hr />
+     				<ul class="tags" id="post_tags">{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{/block:Tags}</ul>
+				{/block:HasTags}
+        	</div>
+			<!--### POST CONTENT ###-->  
+			<div id="post_content">
+
+				{block:Caption}<div id="post_body"><p>{Caption}</p></div>{/block:Caption}{block:AlbumArt}
+<img src="{AlbumArtURL}" style="padding-bottom:10px" />
+{/block:AlbumArt}
+				 {AudioPlayerBlack}
+				
+{block:ExternalAudio}{ExternalAudioURL} {/block:ExternalAudio}
+{block:PostNotes}<div id="post_notes">{PostNotes}</div> {/block:PostNotes}
+			</div>
+</div> 
+		{/block:Audio}
+		
+<!--### VIDEO POST ###-->  
+		{block:Video} 
+		<div id="post">
+			<!--### POST DATE ###-->
+			<div id="post_date">
+            	<a href="{Permalink}"><img src="{image:Icon}" class="alignleft" style="vertical-align:text-bottom"/></a>
+				<a href="{Permalink}"> {block:Date} <h2>{MonthNumber}-{DayOfMonth}-{ShortYear}</h2>{/block:Date} </a>
+				<ul id="post_other" ><li>{NoteCountWithLabel}</li><li class="last"><a href="{Permalink}">Permalink</a></li></ul>
+				
+				{block:PermalinkPagination}
+					<hr />
+ 					<div style="clear:both;"></div>
+					<div id="permalink_navigation">
+						{block:PreviousPost}<p class="alignleft"><a href="{PreviousPost}">Prev</a></p>{/block:PreviousPost}
+						{block:NextPost}<p class="alignright"><a href="{NextPost}">Next</a></p>{/block:NextPost}
+					</div> 
+					<div style="clear:both;"></div> 
+ 				{/block:PermalinkPagination}
+
+				{block:HasTags}
+					<hr />
+     				<ul class="tags" id="post_tags">{block:Tags}<li><a href="{TagURL}">{Tag}</a></li>{/block:Tags}</ul>
+				{/block:HasTags}
+        	</div>
+			<!--### POST CONTENT ###-->  
+			<div id="post_content">
+				{block:Caption}<div id="post_body"><p>{Caption}</p></div>{/block:Caption}
+				 {Video-500}
+				{block:PostNotes}<div id="post_notes">{PostNotes}</div> {/block:PostNotes}
+			</div>
+</div>
+
+		{/block:Video}
+    	{/block:Posts}
+
+</div>
+
+ <div style="clear:both;"></div>
+          <div id="navigation">
+{block:PreviousPage}    
+              <p class="alignleft">
+              <!-- <a href="#">First</a> -->
+             
+<a href="{PreviousPage}">Prev Page</a>
+
+              </p>
+{/block:PreviousPage}
+{block:NextPage} 
+              <p class="alignright">
+              <a href="{NextPage}" >Next Page</a>
+              <!-- <a href="#">Last</a>  -->
+              </p>
+        {/block:NextPage}   
+        </div>    
+            <div style="clear:both;"></div>
+          <div id="footer"></div>
+        
+
+</div>
+  </body>
+</html>

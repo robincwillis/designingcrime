@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+	<style type="text/css">
+	body{
+		margin:0;
+	}
+
+	.controls{
+		position: relative;
+		z-index: 400;
+	}
+
+	.main{
+		position: fixed;
+		width:100%;
+		height:100%;
+		top:0;
+		left:0;
+	}
+
+	.a{
+		background: black;
+	}
+	.b{
+		background: white;
+	}
+
+	:-webkit-full-screen .controls{
+ 	display: none;
+}
+
+:-moz-full-screen .controls{
+ 	display: none;
+}
+
+:-ms-fullscreen .controls{
+ 	display: none;
+}
+
+:full-screen .controls{ /*pre-spec */
+ 	display: none;
+}
+
+:fullscreen .controls{ /* spec */
+ 	display: none;
+}
+
+
+
+	</style>
+
+</head>
+
+<body>
+<div class="main a">
+
+</div>
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+
+<script type="text/javascript">
+
+var rate = 100;
+
+var pause = false;
+
+$(document).on('click', function(){
+  pause = !pause;
+})
+
+setInterval(function(){
+  if(!pause){
+    $('.main').toggleClass('a');
+  }
+
+	// if($('.main').hasClass('a')){
+
+	// }
+
+
+}, rate);
+
+
+function launchFullscreen(element) {
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+function launchIntoFullscreen(element) {
+	console.log('okokok')
+  if(element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if(element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if(element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if(element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.mozCancelFullScreen) {
+    document.mozCancelFullScreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+
+function dumpFullscreen() {
+  console.log("document.fullscreenElement is: ", document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
+  console.log("document.fullscreenEnabled is: ", document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled || document.msFullscreenEnabled);
+}
+
+
+// document.addEventListener("fullscreenchange", function(e) {
+//   console.log("fullscreenchange event! ", e);
+// });
+// document.addEventListener("mozfullscreenchange", function(e) {
+//   console.log("mozfullscreenchange event! ", e);
+// });
+// document.addEventListener("webkitfullscreenchange", function(e) {
+//   console.log("webkitfullscreenchange event! ", e);
+// });
+// document.addEventListener("msfullscreenchange", function(e) {
+//   console.log("msfullscreenchange event! ", e);
+// });
+
+$(function() {
+
+
+});
+
+</script>
+
+  <div class="controls" style="padding:20px;">
+    <button onclick="launchFullscreen(document.documentElement);" class="sexyButton">Launch Fullscreen</button>
+    <button onclick="exitFullscreen();" class="sexyButton">Hide Fullscreen</button>
+    <button onclick="dumpFullscreen();" class="sexyButton">Dump Fullscreen Property Data</button>
+  </div>
+
+</body>
+</html>
